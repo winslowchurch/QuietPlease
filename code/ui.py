@@ -40,5 +40,32 @@ class UI:
                          (position[0], position[1], filled_width, dimensions[1]))
 		
 	def showDialogue(self, dialogue):
-		dialogueStr = self.font.render(str(dialogue), True, self.redColor)
-		self.surface.blit(dialogueStr, OVERLAY_POSITIONS['dialogue'])
+    	# Set up font and text area dimensions
+		max_width = 450
+		padding = 10  # Padding around the text	
+		position = OVERLAY_POSITIONS['dialogue']
+
+		words = dialogue.split(" ")
+		lines = []
+		current_line = ""
+		for word in words:
+			test_line = current_line + " " + word if current_line else word
+			text_width, text_height = self.font.size(test_line)
+			if text_width > max_width:
+				lines.append(current_line)
+				current_line = word
+			else:
+				current_line = test_line
+   
+		if current_line:
+			lines.append(current_line)
+
+		line_height = self.font.get_linesize()
+		box_width = max_width + 2 * padding
+		box_height = len(lines) * line_height + 2 * padding
+
+		pygame.draw.rect(self.surface, self.creamColor, (*position, box_width, box_height))
+
+		for i, line in enumerate(lines):
+			text_surface = self.font.render(line, True, self.redColor)
+			self.surface.blit(text_surface, (position[0] + padding, position[1] + padding + i * line_height))
