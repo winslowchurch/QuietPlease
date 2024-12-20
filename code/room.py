@@ -21,9 +21,8 @@ class Library_Room:
 		self.floor = pygame.image.load(f'{overlay_path}floor.png').convert_alpha()
 		self.outside = pygame.image.load(f'{overlay_path}outside.png').convert_alpha()
 
-		
 	def update(self, Room, mp):
-		print("useless for now")
+		self.ui.clickSound.play()
 
 	def draw(self,surface, Room):
 		surface.blit(self.outside, (0,0))
