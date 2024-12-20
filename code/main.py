@@ -1,37 +1,59 @@
 import pygame, sys
 from room import Room
 from settings import *
+from transition import Transition
+from timer import Timer 
 
 class Game:
-	def __init__(self):
-		self.create_rooms()
-		pygame.display.set_caption('Quiet Please')
+    def __init__(self):
+        # Setup
+        self.create_rooms()
+        pygame.display.set_caption('Quiet Please')
 
-	def create_rooms(self):
-		self.display_surface = screen
-		self.room = Room(screen)
+        # Initialize Timer and Transition
+        self.day_timer = Timer(DAY_LENGTH, self.end_day)
+        self.transition = Transition(self.reset_day, self)
+        self.sleeping = False
+        
+        self.day_timer.activate() 
+    
+    def create_rooms(self):
+        self.display_surface = screen
+        self.room = Room(screen)
+        
+    def end_day(self):
+        self.sleeping = True
+        
+    def reset_day(self):
+        print("Day has been reset!")
+        self.day_timer.activate()
 
-	def run(self):
-		self.room.current.draw(self.display_surface, self.room)
+    def run(self):
+        # Update timer
+        self.day_timer.update()
+        # Draw current room
+        self.room.current.draw(self.display_surface, self.room)
+        # Let transition run
+        if self.sleeping:
+            self.transition.play()
 
+
+# Pygame setup
 pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 game = Game()
 
-# pygame.mixer.music.load('../assets/background.mp3')
-# pygame.mixer.music.play(-1) 
-# pygame.mixer.music.set_volume(0.1)
-
+# Main loop
 while True:
-	mouse_position = pygame.mouse.get_pos()
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			pygame.quit()
-			sys.exit()
-		elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-			game.room.update(mouse_position)
-	
-	game.run()
-	pygame.display.update()
-	clock.tick(60)
+    mouse_position = pygame.mouse.get_pos()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            game.room.update(mouse_position)
+
+    game.run()
+    pygame.display.update()
+    clock.tick(60)
