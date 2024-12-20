@@ -25,10 +25,24 @@ class Library_Room:
 		self.ui.clickSound.play()
 
 	def draw(self,surface, Room, day_timer):
+		darkened_outside = self.getLightOutside(day_timer)
+		surface.blit(darkened_outside, (0, 0))
+
 		surface.blit(self.floor, (0,0))
-		surface.blit(self.outside, (0,0))
 		surface.blit(self.walls, (0,0))
 		surface.blit(self.counter,(0,0))
 
 		self.ui.showBookBucks()
 		self.ui.showProgressBar(day_timer.getProgress())
+
+	### Darken outside image based on time of day ###
+	def getLightOutside(self, day_timer):
+		darkness = int(255 * day_timer.getProgress())  # Calculate alpha based on progress
+
+    	# Create a temporary surface for the outside
+		temp_surface = self.outside.copy()
+		overlay = pygame.Surface(self.outside.get_size(), pygame.SRCALPHA)	
+		overlay.fill((0, 0, 0, darkness))
+		temp_surface.blit(overlay, (0, 0))  # Apply the darkening overlay
+
+		return temp_surface
