@@ -8,4 +8,6 @@ CHANCE_OF_RAIN = 5
 
 OVERLAY_POSITIONS = {
 	'bookBucks' : (15, 15), 
-	'progressBar': (200, 20)}
+	'progressBar': (200, 20),
+    'dialogue': (100, 150)
+}

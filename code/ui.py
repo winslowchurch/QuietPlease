@@ -4,7 +4,7 @@ from data import *
 
 class UI:
 	def __init__(self,surface):
-		self.display_surface = surface
+		self.surface = surface
 		self.font = pygame.font.Font('../assets/kozy.TTF', 60) 
 		self.font.set_bold(True)
 		self.redColor = (66,11,11,255)
@@ -20,21 +20,25 @@ class UI:
 	def showBookBucks(self):
 		item_surf = self.items_surf["bookBucks"]
 		item_rect = item_surf.get_rect(topleft=OVERLAY_POSITIONS['bookBucks'])
-		self.display_surface.blit(item_surf, item_rect)
+		self.surface.blit(item_surf, item_rect)
 		# display current funds
 		text_x = OVERLAY_POSITIONS['bookBucks'][0] + 40
 		text_y = OVERLAY_POSITIONS['bookBucks'][1] - 5
 		bookBucksCount = self.font.render(str(self.bookBucks), True, self.redColor)
-		self.display_surface.blit(bookBucksCount, (text_x, text_y))
+		self.surface.blit(bookBucksCount, (text_x, text_y))
 	
 	def showProgressBar(self, progress):
 		position = OVERLAY_POSITIONS['progressBar']
 		dimensions = (150, 50)
 	
 		# Background bar
-		pygame.draw.rect(self.display_surface, self.creamColor, 
+		pygame.draw.rect(self.surface, self.creamColor, 
                          (*position, *dimensions))
 		 # Foreground bar
 		filled_width = dimensions[0] * progress
-		pygame.draw.rect(self.display_surface, self.redColor, 
+		pygame.draw.rect(self.surface, self.redColor, 
                          (position[0], position[1], filled_width, dimensions[1]))
+		
+	def showDialogue(self, dialogue):
+		dialogueStr = self.font.render(str(dialogue), True, self.redColor)
+		self.surface.blit(dialogueStr, OVERLAY_POSITIONS['dialogue'])
