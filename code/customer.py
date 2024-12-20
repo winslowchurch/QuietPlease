@@ -6,6 +6,7 @@ class Customer:
     def __init__(self):
         self.current = None
         self.currentDialogue = None
+        self.checkoutButtonRect = None
         
         self.surfOptions = {
             name: pygame.image.load(f'../graphics/customers/{filename}').convert_alpha() 
@@ -17,7 +18,7 @@ class Customer:
         if self.current:
             surface.blit(self.current, (0, 0))
         if self.currentDialogue:
-            ui.showDialogue(self.currentDialogue)
+            self.checkoutButtonRect = ui.showDialogue(self.currentDialogue)
     
     ### Randomly selects new customer and question
     def newCustomer(self):

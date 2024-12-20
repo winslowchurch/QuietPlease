@@ -31,7 +31,10 @@ class Library_Room:
 		self.customer = Customer()
 
 	def update(self, Room, mp):
-		self.ui.clickSound.play()
+		if self.customer.checkoutButtonRect.collidepoint(mp):
+			self.customer.newCustomer()
+			self.ui.bookBucks += 1
+			self.ui.clickSound.play()
 
 	def draw(self, surface, Room, day_timer):
 		self.outside.draw(surface, day_timer)
