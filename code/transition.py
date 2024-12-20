@@ -3,7 +3,6 @@ from settings import *
 
 class Transition:
     def __init__(self, reset, game):
-        # Setup
         self.display_surface = pygame.display.get_surface()
         self.reset = reset
         self.game = game
@@ -13,6 +12,7 @@ class Transition:
         self.color = 255
         self.speed = -2
 
+    # Not a one-time call, needs an if/while loop
     def play(self):
         self.color += self.speed
         if self.color <= 0:

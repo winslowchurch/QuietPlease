@@ -24,10 +24,11 @@ class Library_Room:
 	def update(self, Room, mp):
 		self.ui.clickSound.play()
 
-	def draw(self,surface, Room):
+	def draw(self,surface, Room, day_timer):
 		surface.blit(self.floor, (0,0))
 		surface.blit(self.outside, (0,0))
 		surface.blit(self.walls, (0,0))
 		surface.blit(self.counter,(0,0))
 
-		self.ui.show_bookBucks()
+		self.ui.showBookBucks()
+		self.ui.showProgressBar(day_timer.getProgress())

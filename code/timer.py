@@ -14,6 +14,14 @@ class Timer:
     def deactivate(self):
         self.active = False
         self.start_time = 0
+    
+    ### Return the progress as a value between 0 and 1 ###
+    def getProgress(self):
+        if not self.active or self.start_time == 0:
+            return 0
+        current_time = pygame.time.get_ticks()
+        elapsed_time = current_time - self.start_time
+        return min(elapsed_time / self.duration, 1)
 
     def update(self):
         current_time = pygame.time.get_ticks()

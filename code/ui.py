@@ -8,6 +8,7 @@ class UI:
 		self.font = pygame.font.Font('../assets/kozy.TTF', 60) 
 		self.font.set_bold(True)
 		self.redColor = (66,11,11,255)
+		self.creamColor = (232,215,215,255)
 		
 		self.bookBucks = 100
 		self.items_surf = {item: pygame.image.load(f'../graphics/{item}.png').convert_alpha() 
@@ -16,7 +17,7 @@ class UI:
 		pygame.mixer.init()
 		self.clickSound = pygame.mixer.Sound('../assets/click.wav')
 
-	def show_bookBucks(self):
+	def showBookBucks(self):
 		item_surf = self.items_surf["bookBucks"]
 		item_rect = item_surf.get_rect(topleft=OVERLAY_POSITIONS['bookBucks'])
 		self.display_surface.blit(item_surf, item_rect)
@@ -26,3 +27,14 @@ class UI:
 		bookBucksCount = self.font.render(str(self.bookBucks), True, self.redColor)
 		self.display_surface.blit(bookBucksCount, (text_x, text_y))
 	
+	def showProgressBar(self, progress):
+		position = OVERLAY_POSITIONS['progressBar']
+		dimensions = (150, 50)
+	
+		# Background bar
+		pygame.draw.rect(self.display_surface, self.creamColor, 
+                         (*position, *dimensions))
+		 # Foreground bar
+		filled_width = dimensions[0] * progress
+		pygame.draw.rect(self.display_surface, self.redColor, 
+                         (position[0], position[1], filled_width, dimensions[1]))

@@ -32,7 +32,7 @@ class Game:
         # Update timer
         self.day_timer.update()
         # Draw current room
-        self.room.current.draw(self.display_surface, self.room)
+        self.room.current.draw(self.display_surface, self.room, self.day_timer)
         # Let transition run
         if self.sleeping:
             self.transition.play()
