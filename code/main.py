@@ -3,6 +3,7 @@ from room import Room
 from settings import *
 from transition import Transition
 from timer import Timer 
+from random import randint
 
 class Game:
     def __init__(self):
@@ -25,7 +26,7 @@ class Game:
         self.sleeping = True
         
     def reset_day(self):
-        print("Day has been reset!")
+        self.room.libraryRoom.outside.raining = randint(1, CHANCE_OF_RAIN) == 1
         self.day_timer.activate()
 
     def run(self):
