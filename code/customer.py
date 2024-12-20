@@ -24,4 +24,4 @@ class Customer:
         customer = random.choice(list(CUSTOMERS_LIST.keys()))
         self.current = self.surfOptions.get(customer)
         
-        self.currentDialogue = random.choice(QUESTIONS_LIST)
+        self.currentDialogue = random.choice(CHECKOUT_DIALOGUE_LIST)
