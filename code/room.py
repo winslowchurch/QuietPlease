@@ -18,10 +18,17 @@ class Library_Room:
 		overlay_path = '../graphics/'
 		self.counter = pygame.image.load(f'{overlay_path}counter.png').convert_alpha()
 		self.walls = pygame.image.load(f'{overlay_path}walls.png').convert_alpha()
+		self.floor = pygame.image.load(f'{overlay_path}floor.png').convert_alpha()
+		self.outside = pygame.image.load(f'{overlay_path}outside.png').convert_alpha()
+
 		
 	def update(self, Room, mp):
 		print("useless for now")
 
 	def draw(self,surface, Room):
+		surface.blit(self.outside, (0,0))
+		surface.blit(self.floor, (0,0))
 		surface.blit(self.walls, (0,0))
 		surface.blit(self.counter,(0,0))
+
+		self.ui.show_bookBucks()
