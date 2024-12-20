@@ -1,4 +1,4 @@
-import pygame, random
+import pygame
 from ui import UI
 
 class Room:
@@ -25,8 +25,8 @@ class Library_Room:
 		self.ui.clickSound.play()
 
 	def draw(self,surface, Room):
-		surface.blit(self.outside, (0,0))
 		surface.blit(self.floor, (0,0))
+		surface.blit(self.outside, (0,0))
 		surface.blit(self.walls, (0,0))
 		surface.blit(self.counter,(0,0))
 

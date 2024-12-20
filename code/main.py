@@ -19,7 +19,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 game = Game()
 
-# pygame.mixer.music.load('assets/kozyTunes.mp3')
+# pygame.mixer.music.load('../assets/background.mp3')
 # pygame.mixer.music.play(-1) 
 # pygame.mixer.music.set_volume(0.1)
 
