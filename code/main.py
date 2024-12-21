@@ -13,10 +13,11 @@ class Game:
 
         # Initialize Timer and Transition
         self.day_timer = Timer(DAY_LENGTH, self.end_day)
-        self.transition = Transition(self.reset_day, self)
+        self.transition = Transition(self.new_day, self)
         self.sleeping = False
         
         self.day_timer.activate() 
+        self.new_day()
     
     def create_rooms(self):
         self.display_surface = screen
@@ -25,8 +26,14 @@ class Game:
     def end_day(self):
         self.sleeping = True
         
-    def reset_day(self):
+    def new_day(self):
+        # Decide weather + play weather noises
         self.room.libraryRoom.outside.raining = randint(1, CHANCE_OF_RAIN) == 1
+        if (self.room.libraryRoom.outside.raining):
+            self.room.libraryRoom.outside.rain_sound.play(loops=-1)
+        else:
+            self.room.libraryRoom.outside.rain_sound.stop()
+
         self.day_timer.activate()
 
     def run(self):

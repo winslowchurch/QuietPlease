@@ -16,10 +16,10 @@ class Customer:
 
         # Transition-related attributes
         self.transitionY = 0  # Controls the movement of the customer
-        self.transitionSpeed = 10  # Speed of transition
+        self.transitionSpeed = 15 
         self.inTransition = False
         self.transitionPhase = None  # "outgoing" or "incoming"
-        self.newCustomerData = None  # Holds the data for the incoming customer
+        self.newCustomerData = None
 
     def draw(self, surface, ui):
         if self.inTransition:

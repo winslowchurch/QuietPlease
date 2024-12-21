@@ -6,9 +6,10 @@ class Outside:
         self.raining = False
         self.background = pygame.image.load('../graphics/outside.png').convert_alpha()
         self.rain_effect = RainEffect(surface)
+        self.rain_sound = pygame.mixer.Sound('../assets/rain.mp3')
+        self.rain_sound.set_volume(0.15)
 
     def draw(self, surface, day_timer):
-        
         surface.blit(self.background, (0, 0))
         if self.raining:
             self.rain_effect.update_and_draw()
